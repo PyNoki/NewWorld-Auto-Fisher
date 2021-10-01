@@ -1,5 +1,6 @@
-You will need to install a few packages for this one 
+You will need to change your fishing cast key to "-"
 
+--Packages you will need--
 pip install pynput
 pip install PyAutoGUI
 
