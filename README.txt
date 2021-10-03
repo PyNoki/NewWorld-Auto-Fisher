@@ -1,5 +1,6 @@
-You will NEED TO change your fishing cast key to "-"
-DO NOT stand in the water while fishing, or else the bot can't fix your pole.
+• Change your fishing cast key to "-"
+• DO NOT stand in the water while fishing, or else the bot can't fix your pole
+• PUT UR SETTINGS ON HIGH
 
 --Packages you will need--
 pip install pynput
@@ -17,7 +18,7 @@ ALSO - If you have problems with the images not being detected, its because they
 
 The rest of the images are using confidence from OpenCV so it should detect those almost every time.
 
-So please look at the images and take your own if needed (PUT UR SETTINGS ON HIGH)
+So please look at the images and take your own if needed ()
 
 If you needed to install more or ran into problems please let me know
 
