@@ -1,21 +1,38 @@
-import pyautogui
-from pyautogui import *
-from pynput.keyboard import *
-import random
-from pynput.keyboard import Key, Controller
-import time
+from functions import *
 
 clicktime = False
 reeltime = False
+standing = False
+weildingRod = False
 
 while True:
 
     if pyautogui.locateOnScreen('waitingforcast.png') != None:
+        weildingRod = True
+
+    if pyautogui.locateOnScreen('standing.png') != None:
+        pydirectinput.keyDown('f3')
+        pydirectinput.keyUp('f3')
+        time.sleep(1)
+        if pyautogui.locateOnScreen('poleisbrokenalert.png', confidence = 0.5) != None:
+            repairPole()
+            print ('pole repaired')
+            time.sleep(2)
+            pydirectinput.keyDown('f3')
+            pydirectinput.keyUp('f3')
+            time.sleep(0.2)
+            standing = False
+
+    elif pyautogui.locateOnScreen('waitingforcast.png') != None and weildingRod == True:
         print('waiting to cast')
         time.sleep(random.randrange(1,2))
         pyautogui.keyDown('-')
         pyautogui.keyUp('-')
-        time.sleep(random.randrange(2,5))
+        time.sleep(1)
+        
+        if pyautogui.locateOnScreen('castmissed.png', confidence = 0.8) != None:
+            print('resetting cursor')
+            resetCursor2()
 
     elif pyautogui.locateOnScreen('polecasted.png') != None:
         print('were casted')
@@ -30,9 +47,10 @@ while True:
         clicktime = False
 
     elif reeltime == True:
-        print('WE FISHIN')
-        pyautogui.keyDown('-')
-        time.sleep(random.randrange(0,1)) #Comment this line out for larger fish and uncomment the below line
-        #time.sleep(0.3) un-comment this out to catch larger fish and comment the line above ^
-        pyautogui.keyUp('-')
-        
+        if pyautogui.locateOnScreen('hold1.png', confidence=0.7) != None:
+            pyautogui.keyDown('-')
+            print('Hold1')
+
+        else:
+            pyautogui.keyUp('-')
+            print('Release')
