@@ -54,4 +54,3 @@ while True:
         else:
             pyautogui.keyUp('-')
             print('Release')
-repairPole()
