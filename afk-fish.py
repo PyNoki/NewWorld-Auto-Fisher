@@ -47,7 +47,7 @@ while True:
         clicktime = False
 
     elif reeltime == True:
-        if pyautogui.locateOnScreen('hold1.png', confidence=0.7) != None:
+        while pyautogui.locateOnScreen('hold1.png', confidence=0.7) != None:
             pyautogui.keyDown('-')
             print('Hold1')
 
