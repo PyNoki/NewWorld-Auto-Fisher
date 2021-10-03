@@ -4,6 +4,7 @@ You will need to change your fishing cast key to "-"
 pip install pynput
 pip install PyAutoGUI
 pip install opencv-python
+pip install PyDirectInput
 
 ALSO - If you have problems with the images not being detected, its because they arent a pixel perfect match, this includes
 
