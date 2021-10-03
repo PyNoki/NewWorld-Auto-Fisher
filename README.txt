@@ -2,6 +2,8 @@
 • DO NOT stand in the water while fishing, or else the bot can't fix your pole
 • PUT UR SETTINGS ON HIGH
 
+RUN startFishing.py (loops script.py encase an error happens)
+
 --Packages you will need--
 pip install pynput
 pip install PyAutoGUI
