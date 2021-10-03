@@ -21,3 +21,19 @@ So please look at the images and take your own if needed (PUT UR SETTINGS ON HIG
 If you needed to install more or ran into problems please let me know
 
 https://github.com/PyMan142/NewWorld-Auto-Fisher
+
+----------------------
+
+Changes from v1 - v2 are the following
+
+New Packages added
+• pip install PyDirectInput
+• pip install opencv-python
+
+• Detection for pole breaking & fixing
+• Detection for cast not landing in the water (this happened after you catch a tier 3 or higher fish)
+• Moving mouse when cast wasn't in the water
+• Using OpenCV for tug of war with the fish, this results in much faster speeds and usually gets bigger fish! 
+
+I am still working on adding bait, but I managed to pull this together pretty fast. 
+Thank you for your feedback as always.
