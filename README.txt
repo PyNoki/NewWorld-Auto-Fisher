@@ -1,4 +1,5 @@
-You will need to change your fishing cast key to "-"
+You will NEED TO change your fishing cast key to "-"
+DO NOT stand in the water while fishing, or else the bot can't fix your pole.
 
 --Packages you will need--
 pip install pynput
