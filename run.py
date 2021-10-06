@@ -51,7 +51,7 @@ def main():
     findstatus = True
     status = ''
     
-    #Fishing Pole EQUIPPTED in inventory coords
+    #Fishing Pole EQUIPPED in inventory co-ords
     x = 0
     y = 0
 
