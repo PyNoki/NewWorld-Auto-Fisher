@@ -15,7 +15,7 @@ clicktime = False
 reeltime = False
 standing = False
 weildingRod = False
-fishcaught = 1
+fishcaught = 0
 findstatus = True
 status = ''
 
@@ -63,7 +63,7 @@ def main():
         if not pause:
             if findstatus == True:
 
-                if fishcaught == 20:
+                if fishcaught == 10:
                     time.sleep(2)
                     pydirectinput.keyDown('tab')
                     pydirectinput.keyUp('tab')
