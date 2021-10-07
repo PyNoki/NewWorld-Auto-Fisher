@@ -49,6 +49,7 @@ def main():
     weildingRod = False
     fishcaught = 1
     findstatus = True
+    release = 0
     status = ''
     
     #Fishing Pole EQUIPPED in inventory co-ords
@@ -63,6 +64,16 @@ def main():
         if not pause:
             if findstatus == True:
 
+                #Step 6 (if casted - at the top for faster detection)
+                if status == 'casted':
+                    if pyautogui.locateOnScreen('polecasted.png', confidence = 0.8) == None:
+                        print ('Gotta click this fish')
+                        pydirectinput.keyDown('-')
+                        pydirectinput.keyUp('-')
+                        time.sleep(0.5)
+                        status = 'reeltime'
+
+                # If cought x amt of fish, repair    
                 if fishcaught == 10:
                     time.sleep(2)
                     pydirectinput.keyDown('tab')
@@ -88,37 +99,28 @@ def main():
                     time.sleep(1)
                     fishcaught = 0
 
-                #Step 6
-                if status == 'casted':
+                #Step 1 (to start the loop)
+                if status == '':
+                    if pyautogui.locateOnScreen('standing.png') != None:
+                        status = 'equiptpole'
+                        release = 0
+                        print('Gotta equipt the rod')
+
                     if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.8) != None:
                         status = 'readytocast'
+                        print('holding the rod')
 
-                    elif pyautogui.locateOnScreen('polecasted.png', confidence = 0.8) == None:
-                        print ('Gotta click this fish')
-                        pydirectinput.keyDown('-')
-                        pydirectinput.keyUp('-')
-                        time.sleep(0.5)
-                        status = 'reeltime'
-
-                #Step 1
-                if pyautogui.locateOnScreen('standing.png') != None:
-                    status = 'equiptpole'
-
-                #Step 2
+                #Step 2 (equipt pole if we see the number 2)
                 if status == 'equiptpole':
                     pydirectinput.keyDown('f3')
                     pydirectinput.keyUp('f3')
                     time.sleep(1)
-                    status = 'poleequipt'
-
-                #Step 3
-                if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.8) != None and findstatus == True:
                     status = 'readytocast'
-                    print('holding the rod')
 
-                #Step 4
+                #Step 4 (cast the rod if we see the fishhook)
                 if status == 'readytocast':
                     print('casting pole')
+                    release = 0
                     time.sleep(random.randrange(1,2))
                     pydirectinput.keyDown('-')
                     pydirectinput.keyUp('-')
@@ -138,21 +140,24 @@ def main():
                 findstatus = False
 
             if status == 'tugtime':
-                if pyautogui.locateOnScreen('hold1.png', confidence=0.7) != None or pyautogui.locateOnScreen('hold2.png', confidence=0.8) != None or pyautogui.locateOnScreen('hold3.png', confidence=0.9) != None or pyautogui.locateOnScreen('hold4.png', confidence=0.9) != None:
+                if pyautogui.locateOnScreen('hold1.png', confidence=0.7) != None or pyautogui.locateOnScreen('hold2.png', confidence=0.8) != None or pyautogui.locateOnScreen('hold3.png', confidence=0.9) != None:
                     pydirectinput.keyDown('-')
                     print('Hold1')
 
+                    if release > 0:
+                        release -= 1
+
                 else:
                     pydirectinput.keyUp('-')
-                    print('Release')
+                    print('release')
+                    release += 1
 
-                if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.8) != None:
-                    print('Grats on the fish! - Restarting loop')
-                    fishcaught += 1
-                    pydirectinput.keyUp('altleft')
-                    findstatus = True
-                    status = ''
-                    
+                    if release > 10:
+                        print('Grats on the fish! (I hope) -- Restarting loop')
+                        pydirectinput.keyUp('altleft')
+                        fishcaught += 1
+                        status = ''
+                        findstatus = True          
 
     lis.stop()
 
