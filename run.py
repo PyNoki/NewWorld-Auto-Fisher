@@ -73,7 +73,7 @@ def main():
                         time.sleep(0.5)
                         status = 'reeltime'
 
-                # If cought x amt of fish, repair    
+                # If caught x amt of fish, repair    
                 if fishcaught == 10:
                     time.sleep(2)
                     pydirectinput.keyDown('tab')
