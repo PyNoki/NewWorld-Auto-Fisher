@@ -1,3 +1,8 @@
+# Features
+
+- Auto repair
+- Bait support
+- Anti detection (still a work in progress) but using random times and click positions
 
 # Prerequisites
 
@@ -25,9 +30,3 @@
 - Position yourself so that you're not too deep in the water, and that you can still open your inventory
 - Make sure your cast will land in the water with the bare minimum cast
 - Make sure your crosshair is in a good position
-
-# Features
-
-- Auto repair
-- Bait support
-- Anti detection (still a work in progress) but using random times and click positions
