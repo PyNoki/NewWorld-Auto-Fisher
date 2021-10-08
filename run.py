@@ -113,7 +113,7 @@ def main():
 
                 #Step 1 (to start the loop)
                 if status == '':
-                    if pyautogui.locateOnScreen('standing.png') != None:
+                    if pyautogui.locateOnScreen('standing.png', confidence = 0.8) != None:
                         status = 'equiptpole'
                         release = 0
                         print('Gotta equipt the rod')
