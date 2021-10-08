@@ -26,3 +26,8 @@
 - Make sure your cast will land in the water with the bare minimum cast
 - Make sure your crosshair is in a good position
 
+# Features
+
+- Auto repair
+- Bait support
+- Anti detection (still a work in progress) but using random times and click positions
