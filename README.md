@@ -1,7 +1,7 @@
 # Features
 
-- Auto repair
-- Bait support
+- Bait support 
+- Auto repair will repair every 10 catches
 - Anti detection (still a work in progress) but using random times and click positions
 
 # Prerequisites
@@ -12,7 +12,8 @@
 
 # Setup
 
-- You MUST run getposition.py and put your cursor in the middle of the fishing rod while its equipped to your character (the console will tell you your current mouse position). THEN inside of run.py insert your X position on line 55 and Y position on line 56.
+- You MUST run getposition.py and put your cursor in the middle of the fishing rod while its equipped to your character (the console will tell you your current mouse position). THEN inside of run.py insert your X position on line 39 and Y position on line 40.
+- FOR USING BAIT You MUST edit line 41 and change "waterType" to be " = 1 " for fresh water or " = 2 " for salt water (leave it at 0 if you don't want to use bait)
 
 # Keybinds
 
