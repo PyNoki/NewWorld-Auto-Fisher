@@ -14,7 +14,6 @@
 
 - 1920 x 1080 resolution Full screen (windowed is untested)
 - You MUST run getposition.py and put your cursor in the middle of the fishing rod while its equipped to your character (the console will tell you your current mouse position). THEN inside of run.py insert your X position on line 39 and Y position on line 40.
-- FOR USING BAIT You MUST edit line 41 and change "waterType" to be " = 1 " for fresh water or " = 2 " for salt water (leave it at 0 if you don't want to use bait)
 
 # Keybinds
 
@@ -25,7 +24,7 @@
 
 # Using bait
 
-- Do not have more then 5 slots of bait for a water type, so don't have 6 or 7 types of fresh water bait in your inventory, max 5. Same goes for salt water.
+- The bot will use all the bait you have by default, if you don't want it to use any bait then go to line 41 and change it to "waterType = 0" 
 
 # About to start
 
