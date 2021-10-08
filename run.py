@@ -11,14 +11,6 @@ exit_key = Key.backspace
 pause = True
 running = True
 
-clicktime = False
-reeltime = False
-standing = False
-weildingRod = False
-fishcaught = 0
-findstatus = True
-status = ''
-
 def on_press(key):
     global running, pause
 
@@ -43,18 +35,38 @@ def display_controls():
 
 def main():
 
+    #Fishing Pole EQUIPPTED in inventory coords
+    x = 0
+    y = 0
+    waterType = 0 #Do you want to use bait? 1 = Fresh water, 2 = Salt water (DO NOT HAVE MORE THEN 5 TYPES OF BAIT FOR SALT OR WATER)
+
     clicktime = False
     reeltime = False
     standing = False
     weildingRod = False
-    fishcaught = 1
+    hasBait = True
     findstatus = True
+    fishcaught = 0
     release = 0
     status = ''
-    
-    #Fishing Pole EQUIPPED in inventory co-ords
-    x = 0
-    y = 0
+
+    #fresh positions
+    freshX = x + 315 
+    freshY = y - 212
+    freshA = freshX + randint(-5,5)
+    freshB = freshX + randint(-5,5)
+
+    #salt position 
+    saltX = x + 315
+    saltY = y - 72
+    saltA = saltX  + randint(-5,5)
+    saltB = saltY + randint(-5,5)
+
+    #Button position
+    EquiptX = x + 628
+    EquiptY = y + 150
+    randomEquiptA = EquiptX + randint(-5,5)
+    randomEquiptB = EquiptY + randint(-5,5)
 
     lis = Listener(on_press=on_press)
     lis.start()
@@ -106,8 +118,8 @@ def main():
                         release = 0
                         print('Gotta equipt the rod')
 
-                    if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.8) != None:
-                        status = 'readytocast'
+                    if pyautogui.locateOnScreen('f3.png', confidence = 0.8) != None:
+                        status = 'checkforbait'
                         print('holding the rod')
 
                 #Step 2 (equipt pole if we see the number 2)
@@ -115,10 +127,25 @@ def main():
                     pydirectinput.keyDown('f3')
                     pydirectinput.keyUp('f3')
                     time.sleep(1)
-                    status = 'readytocast'
+
+                    if waterType > 0:
+                        status = 'checkforbait'
+                    else:
+                        status = 'readytocast'
+
+                #Check if bait is already equiped before casting
+                if status == 'checkforbait':
+                    if pyautogui.locateOnScreen('f3.png', confidence = 0.8) != None and pyautogui.locateOnScreen('waitingforcast.png', confidence=0.8) == None:
+                        baitEquipped = True
+                        status = 'readytocast'
+                        print('Bait found to be equipped')
+                    else:
+                        baitEquipped = False
+                        status = 'readytocast'
 
                 #Step 4 (cast the rod if we see the fishhook)
-                if status == 'readytocast':
+                if status == 'readytocast' and waterType == 0 or hasBait == False:
+                    time.sleep(3)
                     print('casting pole')
                     release = 0
                     time.sleep(random.randrange(1,2))
@@ -126,6 +153,77 @@ def main():
                     pydirectinput.keyUp('-')
                     time.sleep(2)
                     status = 'waitingforbite'
+
+                if status == 'readytocast' and waterType > 0 and baitEquipped == True:
+                    time.sleep(3)
+                    print('casting pole')
+                    release = 0
+                    time.sleep(random.randrange(1,2))
+                    pydirectinput.keyDown('-')
+                    pydirectinput.keyUp('-')
+                    time.sleep(2)
+                    status = 'waitingforbite'
+
+                #if we have bait and fresh water
+                if status == 'readytocast' and waterType == 1 and baitEquipped == False and hasBait == True:
+                    time.sleep(2)
+                    pydirectinput.keyDown('r')
+                    pydirectinput.keyUp('r')
+                    time.sleep(2)
+                    print('putting on fresh bait')
+                    pydirectinput.moveTo(freshA, freshB)
+                    time.sleep(randint(1,2))
+                    pydirectinput.click()
+                    time.sleep(randint(1,2))
+                    pydirectinput.moveTo(randomEquiptA, randomEquiptB)
+                    time.sleep(randint(1,2))
+                    pydirectinput.click()
+                    time.sleep(randint(1,2))
+
+                    if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.8) != None:
+                        waterType = 0
+                        hasBait == False
+                        print('Doesnt have any fresh bait')
+
+                    print('casting with fresh bait')
+                    release = 0
+                    time.sleep(random.randrange(3,4))
+                    pydirectinput.keyDown('-')
+                    pydirectinput.keyUp('-')
+                    print('pressed - ')
+                    time.sleep(2)
+                    status = 'waitingforbite'
+
+                #if we have bait and salt water
+                if status == 'readytocast' and waterType == 2 and baitEquipped == False and hasBait == True:
+                    time.sleep(2)
+                    pydirectinput.keyDown('r')
+                    pydirectinput.keyUp('r')
+                    time.sleep(2)
+                    print('putting on salt bait')
+                    pydirectinput.moveTo(saltX, saltB)
+                    time.sleep(randint(1,2))
+                    pydirectinput.click()
+                    time.sleep(randint(1,2))
+                    pydirectinput.moveTo(randomEquiptA, randomEquiptB)
+                    time.sleep(randint(1,2))
+                    pydirectinput.click()
+                    time.sleep(randint(1,2))
+
+                    if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.8) != None:
+                        waterType = 0
+                        hasBait == False
+                        print('Doesnt have any salt bait')
+
+                    print('casting with salt bait')
+                    release = 0
+                    time.sleep(random.randrange(3,4))
+                    pydirectinput.keyDown('-')
+                    pydirectinput.keyUp('-')
+                    print('pressed - ')
+                    time.sleep(2)
+                    status = 'waitingforbite'
+
 
                 #Step 5
                 if status == 'waitingforbite' and pyautogui.locateOnScreen('polecasted.png', confidence = 0.8) != None :
