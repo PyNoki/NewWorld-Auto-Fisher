@@ -52,9 +52,9 @@ def main():
 
     #fresh positions
     freshX = x + 315 
-    freshY = y - 212
+    freshY = y - 210
     freshA = freshX + randint(-5,5)
-    freshB = freshX + randint(-5,5)
+    freshB = freshY + randint(-5,5)
 
     #salt position 
     saltX = x + 315
@@ -201,7 +201,7 @@ def main():
                     pydirectinput.keyUp('r')
                     time.sleep(2)
                     print('putting on salt bait')
-                    pydirectinput.moveTo(saltX, saltB)
+                    pydirectinput.moveTo(saltA, saltB)
                     time.sleep(randint(1,2))
                     pydirectinput.click()
                     time.sleep(randint(1,2))
