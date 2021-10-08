@@ -16,6 +16,10 @@
 - Your freelook key must be 'left alt' (default)
 - Your repair must be 'r' (default)
 
+# Using bait
+
+- Do not have more then 5 slots of bait for a water type, so don't have 6 or 7 types of fresh water bait in your inventory, max 5. Same goes for salt water.
+
 # About to start
 
 - Position yourself so that you're not too deep in the water, and that you can still open your inventory
