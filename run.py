@@ -138,7 +138,7 @@ def main():
                         status = 'readytocast'
 
                 #Step 4 (cast the rod if we see the fishhook)
-                if status == 'readytocast' and waterType == 0 or hasBait == False:
+                if status == 'readytocast' and (waterType == 0 or hasBait == False):
                     time.sleep(3)
                     print('casting pole')
                     release = 0
