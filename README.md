@@ -6,11 +6,11 @@
 
 # Prerequisites
 
-pip install pyautogui
-pip install pydirectinput
-pip install pynput
-pip install pillow
-pip install opencv-python
+- pip install pyautogui
+- pip install pydirectinput
+- pip install pynput
+- pip install pillow
+- pip install opencv-python
 
 # Setup
 
