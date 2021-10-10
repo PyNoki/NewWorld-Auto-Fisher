@@ -111,6 +111,7 @@ def main():
                         status = 'equiptpole'
                         release = 0
                         print('Gotta equipt the rod')
+                        time.sleep(randint(3,5))
 
                     if pyautogui.locateOnScreen('f3.png', confidence = 0.8) != None:
                         status = 'checkforbait'
