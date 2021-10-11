@@ -1,15 +1,21 @@
 from imports import *
 
-keyboard = Controller()
 
-#  ======== settings ========
-resume_key = Key.f1
-pause_key = Key.f2
-exit_key = Key.backspace
+#  ======== Load Config ========
+config = configparser.ConfigParser()
+config.read('config.ini')
+#  ==========================
+
+#  ======== KEYS ========
+resume_key = Key[config['KEYS']['resume_key']]
+pause_key = Key[config['KEYS']['pause_key']]
+exit_key = Key[config['KEYS']['exit_key']]
 #  ==========================
 
 pause = True
 running = True
+
+keyboard = Controller()
 
 def on_press(key):
     global running, pause
@@ -27,18 +33,17 @@ def on_press(key):
 def display_controls():
     print("Autofisher is running")
     print("- Controls:")
-    print("\t f1 = Resume")
-    print("\t f2 = Pause")
-    print("\t backspace = Exit")
+    print("\t", config['KEYS']['resume_key'], " = Resume")
+    print("\t", config['KEYS']['pause_key'], " = Pause")
+    print("\t", config['KEYS']['exit_key']," = Exit")
     print("-----------------------------------------------------")
-    print('Press f1 to start ...')
+    print('Press ', config['KEYS']['resume_key'] ,'to start ...')
 
 def main():
 
-    #Fishing Pole EQUIPPTED in inventory coords
-    x = 0
-    y = 0
-    waterType = 1 #Do you want to use bait? 1 = Fresh water, 2 = Salt water (DO NOT HAVE MORE THEN 5 TYPES OF BAIT FOR SALT OR WATER)
+    x = int(config['POSITION']['x'])
+    y = int(config['POSITION']['y'])
+    waterType = int(config['BAIT']['waterType'])
 
     clicktime = False
     reeltime = False
@@ -74,8 +79,8 @@ def main():
                 if status == 'casted':
                     if pyautogui.locateOnScreen('polecasted.png', confidence = 0.8) == None:
                         print ('Gotta click this fish')
-                        pydirectinput.keyDown('-')
-                        pydirectinput.keyUp('-')
+                        pydirectinput.keyDown(config['KEYS']['fishing_key'])
+                        pydirectinput.keyUp(config['KEYS']['fishing_key'])
                         time.sleep(0.5)
                         status = 'reeltime'
 
@@ -144,8 +149,8 @@ def main():
                     print('casting pole')
                     release = 0
                     time.sleep(random.randrange(1,2))
-                    pydirectinput.keyDown('-')
-                    pydirectinput.keyUp('-')
+                    pydirectinput.keyDown(config['KEYS']['fishing_key'])
+                    pydirectinput.keyUp(config['KEYS']['fishing_key'])
                     time.sleep(2)
                     status = 'waitingforbite'
 
@@ -154,8 +159,8 @@ def main():
                     print('casting pole')
                     release = 0
                     time.sleep(random.randrange(1,2))
-                    pydirectinput.keyDown('-')
-                    pydirectinput.keyUp('-')
+                    pydirectinput.keyDown(config['KEYS']['fishing_key'])
+                    pydirectinput.keyUp(config['KEYS']['fishing_key'])
                     time.sleep(2)
                     status = 'waitingforbite'
 
@@ -183,8 +188,8 @@ def main():
                     print('casting')
                     release = 0
                     time.sleep(random.randrange(3,4))
-                    pydirectinput.keyDown('-')
-                    pydirectinput.keyUp('-')
+                    pydirectinput.keyDown(config['KEYS']['fishing_key'])
+                    pydirectinput.keyUp(config['KEYS']['fishing_key'])
                     print('pressed - ')
                     time.sleep(2)
                     status = 'waitingforbite'
@@ -203,14 +208,14 @@ def main():
 
             if status == 'tugtime':
                 if pyautogui.locateOnScreen('hold1.png', confidence=0.7) != None or pyautogui.locateOnScreen('hold2.png', confidence=0.8) != None or pyautogui.locateOnScreen('hold3.png', confidence=0.9) != None:
-                    pydirectinput.keyDown('-')
+                    pydirectinput.keyDown(config['KEYS']['fishing_key'])
                     print('Hold1')
 
                     if release > 0:
                         release -= 1
 
                 else:
-                    pydirectinput.keyUp('-')
+                    pydirectinput.keyUp(config['KEYS']['fishing_key'])
                     print('release')
                     release += 1
 
