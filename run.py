@@ -214,7 +214,7 @@ def main():
                     print('release')
                     release += 1
 
-                    if release > 10:
+                    if release > 15 or pyautogui.locateOnScreen('f3.png', confidence=0.8) != None:
                         print('Grats on the fish! (I hope) -- Restarting loop')
                         pydirectinput.keyUp('altleft')
                         fishcaught += 1
