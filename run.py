@@ -38,6 +38,8 @@ def main():
     #Fishing Pole EQUIPPTED in inventory coords
     x = 0
     y = 0
+    CenterRegion = (650, 50, 450, 920)
+    InteractRegion = (960, 540, 300, 400)
     waterType = 1 #Do you want to use bait? 1 = Fresh water, 2 = Salt water (DO NOT HAVE MORE THEN 5 TYPES OF BAIT FOR SALT OR WATER)
 
     clicktime = False
@@ -72,7 +74,7 @@ def main():
 
                 #Step 6 (if casted - at the top for faster detection)
                 if status == 'casted':
-                    if pyautogui.locateOnScreen('polecasted.png', confidence = 0.8) == None:
+                    if pyautogui.locateOnScreen('polecasted.png', confidence = 0.6, grayscale=True, region=CenterRegion) == None:
                         print ('Gotta click this fish')
                         pydirectinput.keyDown('-')
                         pydirectinput.keyUp('-')
@@ -107,13 +109,13 @@ def main():
 
                 #Step 1 (to start the loop)
                 if status == '':
-                    if pyautogui.locateOnScreen('standing.png', confidence = 0.8) != None:
+                    if pyautogui.locateOnScreen('standing.png', confidence = 0.6, grayscale=True, region=InteractRegion) != None:
                         status = 'equiptpole'
                         release = 0
                         print('Gotta equipt the rod')
                         time.sleep(randint(3,5))
 
-                    if pyautogui.locateOnScreen('f3.png', confidence = 0.8) != None:
+                    if pyautogui.locateOnScreen('f3.png', confidence = 0.6, grayscale=True, region=InteractRegion) != None:
                         status = 'checkforbait'
                         print('holding the rod')
 
@@ -130,7 +132,7 @@ def main():
 
                 #Check if bait is already equiped before casting
                 if status == 'checkforbait':
-                    if pyautogui.locateOnScreen('f3.png', confidence = 0.8) != None and pyautogui.locateOnScreen('waitingforcast.png', confidence=0.8) == None:
+                    if pyautogui.locateOnScreen('f3.png', confidence = 0.8, grayscale=True, region=InteractRegion) != None and pyautogui.locateOnScreen('waitingforcast.png', confidence=0.8, grayscale=True, region=InteractRegion) == None:
                         baitEquipped = True
                         status = 'readytocast'
                         print('Bait found to be equipped')
@@ -175,7 +177,7 @@ def main():
                     pydirectinput.click()
                     time.sleep(randint(1,2))
 
-                    if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.8) != None:
+                    if pyautogui.locateOnScreen('waitingforcast.png', confidence = 0.7, grayscale=True, region=InteractRegion) != None:
                         waterType = 0
                         hasBait == False
                         print('You dont have any bait left')
@@ -190,7 +192,7 @@ def main():
                     status = 'waitingforbite'
 
                 #Step 5
-                if status == 'waitingforbite' and pyautogui.locateOnScreen('polecasted.png', confidence = 0.8) != None :
+                if status == 'waitingforbite' and pyautogui.locateOnScreen('polecasted.png', confidence = 0.6, grayscale=True, region=CenterRegion) != None :
                     status = 'casted'
                     print('rod casted')
                     pydirectinput.keyDown('altleft')
@@ -202,7 +204,7 @@ def main():
                 findstatus = False
 
             if status == 'tugtime':
-                if pyautogui.locateOnScreen('hold1.png', confidence=0.7) != None or pyautogui.locateOnScreen('hold2.png', confidence=0.8) != None or pyautogui.locateOnScreen('hold3.png', confidence=0.9) != None:
+                if pyautogui.locateOnScreen('hold1.png', confidence=0.7, region=CenterRegion) != None or pyautogui.locateOnScreen('hold2.png', confidence=0.7, region=CenterRegion) != None or pyautogui.locateOnScreen('hold3.png', confidence=0.9, region=CenterRegion) != None:
                     pydirectinput.keyDown('-')
                     print('Hold1')
 
@@ -214,6 +216,7 @@ def main():
                     print('release')
                     release += 1
 
+                    #if release > 15 or pyautogui.locateOnScreen('f3.png', confidence=0.8, grayscale=True, region=InteractRegion) != None:
                     if release > 15:
                         print('Grats on the fish! (I hope) -- Restarting loop')
                         pydirectinput.keyUp('altleft')
