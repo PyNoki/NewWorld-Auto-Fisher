@@ -6,16 +6,12 @@
 
 # Prerequisites
 
-- pip install pyautogui
-- pip install pydirectinput
-- pip install pynput
-- pip install pillow
-- pip install opencv-python
+- pip install -r requirements.txt
 
 # Setup
 
 - 1920 x 1080 resolution Full screen (windowed is untested)
-- You MUST run getposition.py and put your cursor in the middle of the fishing rod while its equipped to your character (the console will tell you your current mouse position). THEN inside of run.py insert your X position on line 39 and Y position on line 40.
+- You MUST run getposition.py and put your cursor in the middle of the fishing rod while its equipped to your character (the console will tell you your current mouse position). THEN inside of config.ini insert your X position on line 9 and Y position on line 10.
 
 # Keybinds
 
